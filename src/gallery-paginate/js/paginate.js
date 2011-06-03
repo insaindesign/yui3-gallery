@@ -6,7 +6,7 @@ var getCN = Y.ClassNameManager.getClassName,
     CLASS_PAGES = getCN(NAME, 'pages'),
     CLASS_PAGE = getCN(NAME, 'page'),
     CLASS_ON = getCN(NAME, 'on'),
-	CLASS_PAGEOF = getCN(NAME, 'page-of'),
+    CLASS_PAGEOF = getCN(NAME, 'page-of'),
     CLASS_NEXT = getCN(NAME, 'next'),
     CLASS_PREV = getCN(NAME, 'previous'),
     CLASS_LAST = getCN(NAME, 'last'),
@@ -152,13 +152,13 @@ Y.Paginate = Y.extend(Paginate, Y.Widget, {
 
     renderUI : function () {
         var t = this.get("template"),
-			cp = this.get("currentPage"),
+            cp = this.get("currentPage"),
             p = [], l = [], i = 0, il = this.get("totalPages"), on;
         
         for (; i < il; i += 1) {
-			on = (i + 1 === cp) ? ' ' + CLASS_ON : '';
-			l[i] = '<a class="' + CLASS_LINK + ' ' + CLASS_PAGE + on +'" data-index="' + (i + 1) + '">' + (i + 1) + '</a> ';
-			p[i] = '<a class="' + CLASS_PAGE + on + '">' + (i + 1) + '</a> ';
+            on = (i + 1 === cp) ? ' ' + CLASS_ON : '';
+            l[i] = '<a class="' + CLASS_LINK + ' ' + CLASS_PAGE + on +'" data-index="' + (i + 1) + '">' + (i + 1) + '</a> ';
+            p[i] = '<a class="' + CLASS_PAGE + on + '">' + (i + 1) + '</a> ';
         }
         
         this.get("contentBox").setContent(Y.substitute(t, {
@@ -180,29 +180,29 @@ Y.Paginate = Y.extend(Paginate, Y.Widget, {
      */
     bindUI : function () {
         var self = this, 
-			bb = self.get("boundingBox"), 
-			cb = self.get("contentBox");
-		//action listeners
-		bb.on("flick", function (e) {
-			if (e.flick.distance > 0) {
-				self.getPreviousPage();
-			} else {
-				self.getNextPage();
-			}
-		}, {
-			axis : (self.get("isVertical")) ? "y" : "x",
-			minDistance:10,
-			minVelocity:0.8
-		});
-		//stop it from highlighting the widget
-		cb.on("mousedown", function (e) {
-			e.preventDefault();
-		});
+            bb = self.get("boundingBox"), 
+            cb = self.get("contentBox");
+        //action listeners
+        bb.on("flick", function (e) {
+            if (e.flick.distance > 0) {
+                self.getPreviousPage();
+            } else {
+                self.getNextPage();
+            }
+        }, {
+            axis : (self.get("isVertical")) ? "y" : "x",
+            minDistance:10,
+            minVelocity:0.8
+        });
+        //stop it from highlighting the widget
+        cb.on("mousedown", function (e) {
+            e.preventDefault();
+        });
         cb.delegate("click", self.getPreviousPage, "." + CLASS_LINK + "." + CLASS_PREV, self);
         cb.delegate("click", self.getNextPage, "." + CLASS_LINK + "." + CLASS_NEXT, self);
         cb.delegate("click", function() {
-			self.getPage(Number(this.getAttribute("data-index")));
-		}, "." + CLASS_LINK + "." + CLASS_PAGE);
+            self.getPage(Number(this.getAttribute("data-index")));
+        }, "." + CLASS_LINK + "." + CLASS_PAGE);
         cb.delegate("click", Y.bind(self.getPage, self, 1), "." + CLASS_LINK + "." + CLASS_FIRST);
         cb.delegate("click", Y.bind(self.getPage, self, self.get("totalPages")), "." + CLASS_LINK + "." + CLASS_LAST);
         //internal change listeners
@@ -220,11 +220,11 @@ Y.Paginate = Y.extend(Paginate, Y.Widget, {
     syncUI : function () {
         this.renderUI();
     },
-	
-	getPage : function (p) {
-		this.set("currentPage", p);
+    
+    getPage : function (p) {
+        this.set("currentPage", p);
         return p;
-	},
+    },
 
     /**
      * Get the page number of the next page
@@ -255,10 +255,10 @@ Y.Paginate = Y.extend(Paginate, Y.Widget, {
     hasPreviousPage : function () {
         return (this.get("currentPage") > 1);    
     },
-	
-	_recordsChange : function () {
-		var self = this;
-		self.initializer();
-		self.renderUI();
-	}
+    
+    _recordsChange : function () {
+        var self = this;
+        self.initializer();
+        self.renderUI();
+    }
 });
